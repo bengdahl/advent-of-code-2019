@@ -48,7 +48,7 @@ for y in range(min_y, max_y+1):
     for x in range(min_x, max_x+1):
         c = color.get((x, y), BLACK)
         if c == WHITE:
-            print('##', end='')
+            print(u"\u2588\u2588", end='')
         elif c == BLACK:
             print('  ', end='')
     print('')

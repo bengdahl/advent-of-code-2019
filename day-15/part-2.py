@@ -46,12 +46,15 @@ def move_drone(d):
 def show_maze(part=1):
     o = ""
     o += chr(27) + "[1;H" + chr(27) + "[J"
-    show = {WALL: '#', OK: '.', OXY: 'O', -1: ' '}
+    show = {WALL: '\u001b[37m\u2588',
+            OK: '\u001b[31m\u2588', 
+            OXY: '\u001b[36m\u2588',
+            -1: '\u001b[39; 49m '}
     for y in range(min_y, max_y+1):
         for x in range(min_x, max_x+1):
-            o += 'D' if (x, y) == drone and part==1 else \
+            o += '\u001b[34m\u2588' if (x, y) == drone and part == 1 else \
                  show[spaces.get((x, y), -1)]
-        o += '\n'
+        o += '\n\u001b[39;49m'
     print(o)
     time.sleep(0.016)
 
@@ -70,7 +73,6 @@ def traverse_maze(path, previous_move=None, found=None):
         if status == WALL:
             spaces[new_drone] = WALL
             path.pop()
-            show_maze()
         elif status == FINISH:
             spaces[new_drone] = OXY
             found = new_drone

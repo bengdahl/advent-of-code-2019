@@ -39,24 +39,17 @@ def move_drone(d):
     max_y = max(max_y, drone2[1])
     return drone2
 
-
-steps = 0
-
-
 def show_maze(path):
-    global steps
-    if steps % 5 != 0:
-        steps += 1
-        return
-    steps += 1
     o = ""
     o += chr(27) + "[1;H" + chr(27) + "[J"
-    show = {0: '#', 1: '.', -1: ' '}
+    show = {0: u"\u001b[37m\u2588",
+            1: '\u001b[31m\u2588', 
+            -1: '\u001b[39;49m '}
     for y in range(min_y, max_y+1):
         for x in range(min_x, max_x+1):
-            o += 'D' if (x, y) == drone else \
+            o += '\u001b[34m\u2588' if (x, y) == drone else \
                  show[spaces.get((x, y), -1)]
-        o += '\n'
+        o += '\n\u001b[37m'
     print(o)
     time.sleep(0.016)
 
